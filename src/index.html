@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Card</title>
-</head>
-<body>
+  </head>
+  <body>
     <my-card></my-card>
+    <div id="shadow"></div>
+    <h1>Header not styled</h1>
     <script src="./my-card.js"></script>
-</body>
-</html>
+    <script>
+      const shadowRoot = document.getElementById("shadow").attachShadow({ mode: "open" });
+      shadowRoot.innerHTML = `
+        <style>
+            h1 {
+                background: red;
+            }
+        </style>
+        <h1>Header styled!</h1>
+      `;
+    </script>
+  <!--  
+  </body>
+        Shadow DOM
+            1. Attach a shadow
+            2. Add content
+--></html>
