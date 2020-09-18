@@ -7,6 +7,13 @@
     <my-card></my-card>
     <div id="shadow"></div>
     <h1>Header not styled</h1>
+
+    <template id="card-template">
+      <p><span class="city"></span> &mdash;<span class="year"></span></p>
+    </template>
+
+    <div id="card-cities"></div>
+
     <script src="./my-card.js"></script>
     <script>
       const shadowRoot = document.getElementById("shadow").attachShadow({ mode: "open" });
@@ -16,12 +23,28 @@
                 background: red;
             }
         </style>
-        <h1>Header styled!</h1>
+        <h1>Header styled</h1>
       `;
+      const cities = [
+        { name: "Prague", year: "2017" },
+        { name: "NY", year: "2018" },
+        { name: "Moscow", year: "2019" },
+      ];
+
+      const fragment = document.getElementById("card-template");
+
+      cities.forEach((city) => {
+        const instance = document.importNode(fragment.content, true);
+        instance.querySelector(".city").innerHTML = city.name;
+        instance.querySelector(".year").innerHTML = city.year;
+        document.getElementById("card-cities").appendChild(instance);
+      });
     </script>
-  <!--  
   </body>
-        Shadow DOM
-            1. Attach a shadow
-            2. Add content
+  <!--  
+        HTML Template
+            1. store html in a template component
+            2. assign to variable using importNode (fragment)
+            3. append to another element
+
 --></html>
